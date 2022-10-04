@@ -4,12 +4,12 @@ from tkinter import Button, messagebox
 
 def add_buttons(frame, word):
     Button(
-        frame, text='отметить как знакомое',
+        frame, text='отметить как знакомое', width=25,
         command=lambda: set_status(word, 1, 0)
     ).grid(row=3, column=0)
     Button(
         frame, text='отметить как хорошо знакомое',
-        command=lambda: set_status(word, 0, 1)
+        command=lambda: set_status(word, 0, 1), width=25
     ).grid(row=3, column=1)
 
 

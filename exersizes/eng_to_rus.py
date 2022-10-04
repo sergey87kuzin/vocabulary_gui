@@ -11,9 +11,13 @@ class WellKnownWord():
         self.to_lang = to_lang
 
     def translate(self, frame, word_id, new_list):
+        ''' очистка формы и закрепление на ней элементов
+        для упражнения по переводу '''
+        for widget in frame.winfo_children():
+            widget.destroy()
         word = self.get_word(word_id, new_list)
         Label(
-            frame, text=word[self.from_lang], width=40
+            frame, text=word[self.from_lang], width=30
         ).grid(row=1, column=0)
         trans = Entry(frame, width=30)
         trans.grid(row=1, column=1)
@@ -25,6 +29,7 @@ class WellKnownWord():
         add_buttons(frame, word)
 
     def get_word(self, word_id, new_list):
+        ''' получение слова из списка '''
         word_id = word_id % 15
         if new_list:
             with sqlite3.connect('vocabulary.db') as conn:
@@ -42,10 +47,12 @@ class WellKnownWord():
                     return
                 random.shuffle(word_list)
                 self.word_list = word_list
+        if len(self.word_list) < word_id:
+            return self.word_list[0]
         return self.word_list[word_id]
 
-    def check_trans(
-            self, frame, word_id, trans):
+    def check_trans(self, frame, word_id, trans):
+        ''' проверка перевода '''
         word = self.word_list[word_id]
         if trans not in word[self.to_lang]:
             messagebox.showinfo(

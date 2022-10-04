@@ -11,22 +11,27 @@ class Word():
         self.is_known = is_known
 
     def show(self, frame, word_id, new_list):
+        ''' очистить область и показать элементы для просмотра
+        новых слов '''
+        for widget in frame.winfo_children():
+            widget.destroy()
         word = self.get_word(word_id, new_list)
         Label(
             frame, text=word[0] + '  -  ' + word[1], pady=10,
             width=50
         ).grid(row=0, column=0, columnspan=2)
         Button(
-            frame, text='Следующее',
+            frame, text='Следующее', width=25,
             command=lambda: self.show(frame, int(word_id) + 1, False)
         ).grid(row=1, column=1)
         Button(
-            frame, text='Предыдущее',
+            frame, text='Предыдущее', width=25,
             command=lambda: self.show(frame, int(word_id) - 1, False)
         ).grid(row=1, column=0)
         add_buttons(frame, word)
 
     def get_word(self, word_id, new_list):
+        ''' получить случайное слово из списка '''
         word_id = word_id % 15
         if new_list:
             with sqlite3.connect('vocabulary.db') as conn:
@@ -44,4 +49,6 @@ class Word():
                     return
                 random.shuffle(word_list)
                 self.word_list = word_list
+        if len(self.word_list) < word_id:
+            return self.word_list[0]
         return self.word_list[word_id]
