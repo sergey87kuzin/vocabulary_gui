@@ -10,6 +10,7 @@ class Vocabulary():
         self.known_words = known_words
         self.to_rus = to_rus
         self.to_eng = to_eng
+        self.frame = ''
 
     def on_closing(self):
         ''' действия при закрытии одного из окон '''
@@ -25,6 +26,7 @@ class Vocabulary():
         self.second_screen.eval('tk::PlaceWindow . center')
         self.second_screen.protocol("WM_DELETE_WINDOW", self.on_closing)
         frame = LabelFrame(self.second_screen)
+        self.frame = frame
         frame.pack()
 
         Button(
