@@ -18,9 +18,13 @@ def test_child(tk_work):
     ''' Проверяем, что установленные на стартовом экране
     кнопки правильно подписаны '''
     tk_work.start()
-    assert len(tk_work.root.winfo_children()) == len(CHILD_BUTTONS), ErrorMessages.WRONG_BUTTON_COUNT.value
+    assert len(tk_work.root.winfo_children()) == len(CHILD_BUTTONS), (
+        ErrorMessages.WRONG_BUTTON_COUNT.value
+    )
     for child in tk_work.root.winfo_children():
-        assert child['text'] in CHILD_BUTTONS, ErrorMessages.WRONG_BUTTON_NAME.value
+        assert child['text'] in CHILD_BUTTONS, (
+            ErrorMessages.WRONG_BUTTON_NAME.value
+        )
 
 
 def test_new_frame(tk_work):
@@ -28,10 +32,14 @@ def test_new_frame(tk_work):
     кнопки подписаны правильно '''
     tk_work.start()
     tk_work.new.show(tk_work.frame, 0, True)
-    assert len(tk_work.frame.winfo_children()) == len(NEW_BUTTONS) + 1, ErrorMessages.WRONG_BUTTON_COUNT.value
+    assert len(tk_work.frame.winfo_children()) == len(NEW_BUTTONS) + 1, (
+        ErrorMessages.WRONG_BUTTON_COUNT.value
+    )
     for child in tk_work.frame.winfo_children():
         if child.widgetName == 'button':
-            assert child['text'] in NEW_BUTTONS, ErrorMessages.WRONG_BUTTON_NAME.value
+            assert child['text'] in NEW_BUTTONS, (
+                ErrorMessages.WRONG_BUTTON_NAME.value
+            )
 
 
 def test_translate_frame(tk_work):
@@ -42,5 +50,9 @@ def test_translate_frame(tk_work):
     # self.voc.root.winfo_children()[1].invoke()
     for child in tk_work.frame.winfo_children():
         if child.widgetName == 'button':
-            assert child['text'] in TRANS_BUTTONS, ErrorMessages.WRONG_BUTTON_NAME.value
-    assert len(tk_work.frame.winfo_children()) == len(TRANS_BUTTONS) + 2, ErrorMessages.WRONG_BUTTON_COUNT.value
+            assert child['text'] in TRANS_BUTTONS, (
+                ErrorMessages.WRONG_BUTTON_NAME.value
+            )
+    assert len(tk_work.frame.winfo_children()) == len(TRANS_BUTTONS) + 2, (
+        ErrorMessages.WRONG_BUTTON_COUNT.value
+    )

@@ -67,7 +67,9 @@ class TestMain():
 
         for child in frame.winfo_children():
             if child.widgetName == 'button':
-                assert child['text'] in self.new_texts, ErrorMessages.WRONG_BUTTON_NAME.value
+                assert child['text'] in self.new_texts, (
+                    ErrorMessages.WRONG_BUTTON_NAME.value
+                )
         self.to_eng.translate(frame, 0, True)
         # self.voc.root.winfo_children()[1].invoke()
         for child in frame.winfo_children():

@@ -2,6 +2,7 @@ import sqlite3
 import random
 from tkinter import Label, Button, messagebox
 from .status_buttons import add_buttons
+from crs.enums.global_enums import ButtonNames, Titles, InfoMessages
 
 
 class Word():
@@ -21,12 +22,12 @@ class Word():
             width=50
         ).grid(row=0, column=0, columnspan=2)
         Button(
-            frame, text='Следующее', width=25,
-            command=lambda: self.show(frame, int(word_id) + 1, False)
+            frame, text=ButtonNames.NEXT.value,
+            width=25, command=lambda: self.show(frame, int(word_id) + 1, False)
         ).grid(row=1, column=1)
         Button(
-            frame, text='Предыдущее', width=25,
-            command=lambda: self.show(frame, int(word_id) - 1, False)
+            frame, text=ButtonNames.PREVIOUS.value,
+            width=25, command=lambda: self.show(frame, int(word_id) - 1, False)
         ).grid(row=1, column=0)
         add_buttons(frame, word)
 
@@ -43,8 +44,8 @@ class Word():
                 ).fetchall()
                 if not word_list:
                     messagebox.showinfo(
-                        title='Внезапно',
-                        message='Нет слов, подходящих под категорию'
+                        title=Titles.OOPS.value,
+                        message=InfoMessages.NOT_FOUND.value
                     )
                     return
                 random.shuffle(word_list)

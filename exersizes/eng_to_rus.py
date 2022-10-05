@@ -2,6 +2,7 @@ import sqlite3
 import random
 from tkinter import Label, Button, messagebox, Entry
 from .status_buttons import add_buttons
+from crs.enums.global_enums import ButtonNames, Titles, InfoMessages
 
 
 class WellKnownWord():
@@ -22,7 +23,8 @@ class WellKnownWord():
         trans = Entry(frame, width=30)
         trans.grid(row=1, column=1)
         Button(
-            frame, text='Проверить', command=lambda: self.check_trans(
+            frame, text=ButtonNames.CHECK.value,
+            command=lambda: self.check_trans(
                 frame, word_id, trans.get()
             )
         ).grid(row=2, column=0, columnspan=2)
@@ -41,8 +43,8 @@ class WellKnownWord():
                 ).fetchall()
                 if not word_list:
                     messagebox.showinfo(
-                        title='Внезапно',
-                        message='Нет слов, подходящих под категорию'
+                        title=Titles.OOPS.value,
+                        message=InfoMessages.NOT_FOUND.value
                     )
                     return
                 random.shuffle(word_list)
@@ -56,7 +58,7 @@ class WellKnownWord():
         word = self.word_list[word_id]
         if trans not in word[self.to_lang]:
             messagebox.showinfo(
-                title='Ошибка',
+                title=Titles.ERROR.value,
                 message=word[self.from_lang] + '  -  ' + word[self.to_lang]
             )
         self.translate(frame, int(word_id)+1, True)

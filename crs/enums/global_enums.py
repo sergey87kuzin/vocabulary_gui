@@ -16,3 +16,18 @@ class ButtonNames(Enum):
     SET_KNOWN = 'отметить как знакомое'
     SET_WELL_KNOWN = 'отметить как хорошо знакомое'
     CHECK = 'Проверить'
+
+
+class Titles(Enum):
+    EXIT = 'Выход'
+    ENGLISH = 'Английский'
+    RESULT = 'Результат'
+    GOT_IT = 'Принято'
+    OOPS = 'Внезапно'
+    ERROR = 'Ошибка'
+
+
+class InfoMessages(Enum):
+    CHANGED = 'состояние изменено'
+    NOT_FOUND = 'Нет слов, подходящих под категорию'
+    EXIT = 'Вы хотите выйти?'

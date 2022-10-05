@@ -1,14 +1,15 @@
 import sqlite3
 from tkinter import Button, messagebox
+from crs.enums.global_enums import ButtonNames, Titles, InfoMessages
 
 
 def add_buttons(frame, word):
     Button(
-        frame, text='отметить как знакомое', width=25,
-        command=lambda: set_status(word, 1, 0)
+        frame, text=ButtonNames.SET_KNOWN.value,
+        width=25, command=lambda: set_status(word, 1, 0)
     ).grid(row=3, column=0)
     Button(
-        frame, text='отметить как хорошо знакомое',
+        frame, text=ButtonNames.SET_WELL_KNOWN.value,
         command=lambda: set_status(word, 0, 1), width=25
     ).grid(row=3, column=1)
 
@@ -29,6 +30,6 @@ def set_status(word, is_known, is_well_known):
                        })
         conn.commit()
     messagebox.showinfo(
-        title='Принято',
-        message='состояние изменено'
+        title=Titles.GOT_IT.value,
+        message=InfoMessages.CHANGED.value
     )
