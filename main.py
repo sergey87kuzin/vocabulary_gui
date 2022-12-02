@@ -1,6 +1,7 @@
-from tkinter import Tk, Button, messagebox, LabelFrame
-from exersizes import new_words, eng_to_rus
-from crs.enums.global_enums import ButtonNames, Titles, InfoMessages
+from tkinter import Button, Entry, LabelFrame, Tk, messagebox
+
+from crs.enums.global_enums import ButtonNames, InfoMessages, Titles
+from exersizes import eng_to_rus, new_words, translate
 
 
 class Vocabulary():
@@ -48,6 +49,12 @@ class Vocabulary():
             self.root, text=ButtonNames.TO_ENG.value,
             width=20, command=lambda: self.to_eng.translate(frame, 0, True)
         ).grid(row=3)
+        trans = Entry(self.root, width=20)
+        trans.grid(row=4)
+        Button(
+            self.root, text=ButtonNames.TRANSLATE.value, width=20,
+            command=lambda: translate.translate(frame, trans.get())
+        ).grid(row=5)
 
 
 if __name__ == '__main__':

@@ -16,6 +16,7 @@ class ButtonNames(Enum):
     SET_KNOWN = 'отметить как знакомое'
     SET_WELL_KNOWN = 'отметить как хорошо знакомое'
     CHECK = 'Проверить'
+    TRANSLATE = 'Перевести'
 
 
 class Titles(Enum):

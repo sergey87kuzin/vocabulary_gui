@@ -18,7 +18,7 @@ class WellKnownWord():
             widget.destroy()
         word = self.get_word(word_id, new_list)
         Label(
-            frame, text=word[self.from_lang], width=30
+            frame, text=str(word_id) + '.' + word[self.from_lang], width=30
         ).grid(row=1, column=0)
         trans = Entry(frame, width=30)
         trans.grid(row=1, column=1)
@@ -48,17 +48,18 @@ class WellKnownWord():
                     )
                     return
                 random.shuffle(word_list)
-                self.word_list = word_list
+                self.word_list = word_list[:15]
         if len(self.word_list) < word_id:
             return self.word_list[0]
         return self.word_list[word_id]
 
     def check_trans(self, frame, word_id, trans):
         ''' проверка перевода '''
+        word_id = word_id % 15
         word = self.word_list[word_id]
         if trans not in word[self.to_lang]:
             messagebox.showinfo(
                 title=Titles.ERROR.value,
                 message=word[self.from_lang] + '  -  ' + word[self.to_lang]
             )
-        self.translate(frame, int(word_id)+1, True)
+        self.translate(frame, int(word_id)+1, False)
